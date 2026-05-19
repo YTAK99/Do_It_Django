@@ -26,6 +26,12 @@
 
  <hr>
 
+{% if user.is_authenticated and user == post.author %} 
+ <a class="btn btn-info btn-sm float-right"
+  href="/blog/update_post/{{ post.pk }}/" role="button">
+    <i class="fas fa-pen"></i>Edit Post</a>
+{% endif %}
+
  <!-- Date/Time -->
  <p>Posted on {{ post.created_at }}</p>
 
@@ -40,7 +46,7 @@
 </figure>
 <!-- Post content-->
 <section class="mb-5">
-    <p class="fs-5 mb-4">{{ post.content }}</p>
+    <p>{{ post.get_content_markdown | safe }}</p>
 
     {% if post.tags.exists %}
         <i class="fas fa-tags"></i>
@@ -68,8 +74,8 @@
         {{ post.get_file_name }}
     {% endif %}
 
-    <p class="fs-5 mb-4">---개발예정---</p>
-    <p class="fs-5 mb-4">---개발예정---</p>
+    <p class="fs-5 mb-4">For me, the most fascinating interface is Twitter. I have odd cosmic thoughts every day and I realized I could hold them to myself or share them with people who might be interested.</p>
+    <p class="fs-5 mb-4">Venus has a runaway greenhouse effect. I kind of want to know what happened there because we're twirling knobs here on Earth without knowing the consequences of it. Mars once had running water. It's bone dry today. Something bad happened there as well.</p>
 </section>
 </article>
 </div>
